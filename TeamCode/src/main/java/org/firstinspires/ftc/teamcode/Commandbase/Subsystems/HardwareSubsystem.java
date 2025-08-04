@@ -18,15 +18,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @Config
 public class HardwareSubsystem {
-    public Servo claw, ZPitch;
-    public Servo leftArm, rightArm;
+    public Servo Claw, ZPitch;
     private DcMotor RTPSpec;
     private DcMotor extendoSlide;
     private DcMotor InvertextendoSlide;
     private DcMotorEx specArm;
     private Motor.Encoder encoder;
     public Servo specWrist, specClaw;
-    private Servo wrist;
+    private Servo Wrist;
 
     public HardwareMap hardwareMap;
 
@@ -35,15 +34,15 @@ public class HardwareSubsystem {
     //Claw
     public boolean clawStateGrabbed = true;
 
-    public static double GRAB = 0.74, OPEN = 0.45;
-    public static double ZGRAB = 0.74, ZOUTTAKE = 0.37;
+    public static double GRAB = 0.64, OPEN = 0.35;
+    public static double ZGRAB = 0.64, ZOUTTAKE = 0.33;
 
-    public static double SPECGRAB = 0.315;
+    public static double SPECGRAB = 0.4.25;
     public static double SPECOPEN = 0;
 
-    public static double RESET_POSE = 0.95;
-    public static double GRAB_POSE = 0.23;
-    public static double SPEC_GRAB = 0.32;
+    public static double RESET_POSE = 0.85;
+    public static double GRAB_POSE = 0.19;
+    public static double SPEC_GRAB = 0.22;
     public double targetPose;
 
     //RTP SpecArm
@@ -73,11 +72,11 @@ public class HardwareSubsystem {
     public boolean usingPIDFArm = true;
 
     //Spec Servos    public static double SPECOPEN = 0, SPECGRAB = 0.5;
-    public static double NEUTRAL = 0.92, SCORE = 0.37;
+    public static double NEUTRAL = 0.82, SCORE = 0.35;
 
     //Wrist
-    public static double NEUTRAL_POSE = 0.94, HORIZONTAL_GRAB_POSE = 0.6;
-    public double rotating = 0.15;
+    public static double NEUTRAL_POSE = 0.84, HORIZONTAL_GRAB_POSE = 0.4;
+    public double rotating = 0.12;
 
     Telemetry telemetry;
 
@@ -85,13 +84,11 @@ public class HardwareSubsystem {
         this.telemetry = opMode.telemetry;
         this.hardwareMap = opMode.hardwareMap;
 
-        this.leftArm = (Servo) hardwareMap.get("leftArm");
-        this.rightArm = (Servo) hardwareMap.get("rightArm");
+        Arm = (Servo) hardwareMap.get("Arm");
 
-        leftArm.setDirection(Servo.Direction.REVERSE);
-        rightArm.setDirection(Servo.Direction.FORWARD);
+        Arm.setDirection(Servo.Direction.FORWARD);
 
-        this.claw = (Servo) hardwareMap.get("Claw");
+        this.Claw = (Servo) hardwareMap.get("Claw");
         this.ZPitch = (Servo) hardwareMap.get("ZPitch");
 
         this.RTPSpec = (DcMotor) hardwareMap.get("specArm");
@@ -128,31 +125,28 @@ public class HardwareSubsystem {
     }
 
     public void armGrab() {
-        leftArm.setPosition(GRAB_POSE);
-        rightArm.setPosition(GRAB_POSE);
+        Arm.setPosition(GRAB_POSE);
         targetPose = GRAB_POSE;
     }
 
     public void hover() {
-        leftArm.setPosition(SPEC_GRAB);
-        rightArm.setPosition(SPEC_GRAB);
+        Arm.setPosition(SPEC_GRAB);
         targetPose = SPEC_GRAB;
     }
 
     public void armReset() {
-        leftArm.setPosition(RESET_POSE);
-        rightArm.setPosition(RESET_POSE);
+        Arm.setPosition(RESET_POSE);
         targetPose = RESET_POSE;
     }
 
     public void SampClose() {
-        claw.setPosition(GRAB);
-        clawStateGrabbed = true;
+        Claw.setPosition(GRAB);
+        ClawStateGrabbed = true;
     }
 
     public void SampOpen() {
-        claw.setPosition(OPEN);
-        clawStateGrabbed = false;
+        Claw.setPosition(OPEN);
+        ClawStateGrabbed = false;
     }
     public void Zintake() {
         ZPitch.setPosition(ZGRAB);
@@ -299,11 +293,11 @@ public class HardwareSubsystem {
 
     //Wrist
     public void neutralGrab() {
-        wrist.setPosition(NEUTRAL_POSE);
+        Wrist.setPosition(NEUTRAL_POSE);
     }
 
     public void horizontalGrab() {
-        wrist.setPosition(HORIZONTAL_GRAB_POSE);
+        Wrist.setPosition(HORIZONTAL_GRAB_POSE);
     }
 
     public void RTPIntake() {
