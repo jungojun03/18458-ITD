@@ -18,15 +18,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @Config
 public class HardwareSubsystem {
-    public Servo claw, ZPitch;
-    public Servo leftArm, rightArm;
+    public Servo Claw, ZPitch;
     private DcMotor RTPSpec;
     private DcMotor extendoSlide;
     private DcMotor InvertextendoSlide;
     private DcMotorEx specArm;
     private Motor.Encoder encoder;
     public Servo specWrist, specClaw;
-    private Servo wrist;
+    private Servo Wrist;
 
     public HardwareMap hardwareMap;
 
@@ -85,13 +84,9 @@ public class HardwareSubsystem {
         this.telemetry = opMode.telemetry;
         this.hardwareMap = opMode.hardwareMap;
 
-        this.leftArm = (Servo) hardwareMap.get("leftArm");
-        this.rightArm = (Servo) hardwareMap.get("rightArm");
+       Arm = (Servo) hardwareMap.get("Arm");
 
-        leftArm.setDirection(Servo.Direction.REVERSE);
-        rightArm.setDirection(Servo.Direction.FORWARD);
-
-        this.claw = (Servo) hardwareMap.get("Claw");
+        this.Claw = (Servo) hardwareMap.get("Claw");
         this.ZPitch = (Servo) hardwareMap.get("ZPitch");
 
         this.RTPSpec = (DcMotor) hardwareMap.get("specArm");
@@ -121,27 +116,24 @@ public class HardwareSubsystem {
 
         this.specClaw = (Servo) hardwareMap.get("sClaw");
         this.specWrist = (Servo) hardwareMap.get("sWrist");
-        this.wrist = (Servo) hardwareMap.get("wrist");
+        this.Wrist = (Servo) hardwareMap.get("Wrist");
 
         //wrist.setDirection(Servo.Direction.REVERSE);
         specWrist.setDirection(Servo.Direction.REVERSE);
     }
 
     public void armGrab() {
-        leftArm.setPosition(GRAB_POSE);
-        rightArm.setPosition(GRAB_POSE);
+       Arm.setPosition(GRAB_POSE);
         targetPose = GRAB_POSE;
     }
 
     public void hover() {
-        leftArm.setPosition(SPEC_GRAB);
-        rightArm.setPosition(SPEC_GRAB);
+       Arm.setPosition(SPEC_GRAB);
         targetPose = SPEC_GRAB;
     }
 
     public void armReset() {
-        leftArm.setPosition(RESET_POSE);
-        rightArm.setPosition(RESET_POSE);
+      Arm.setPosition(RESET_POSE);
         targetPose = RESET_POSE;
     }
 
